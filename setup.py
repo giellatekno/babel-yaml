@@ -18,23 +18,23 @@ readme = open('README.rst').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='babel-yaml',
+    name='babel_yaml',
     version='0.1.0',
     description='Provides an extractor for producing translation strings from a yaml file',
     long_description=readme + '\n\n' + history,
     author='Ryan Johnson',
     author_email='ryan.txanson@gmail.com',
-    url='https://github.com/rtxanson/babel-yaml',
+    url='https://github.com/rtxanson/babel_yaml',
     packages=[
-        'babel-yaml',
+        'babel_yaml',
     ],
-    package_dir={'babel-yaml': 'babel-yaml'},
+    package_dir={'babel_yaml': 'babel_yaml'},
     include_package_data=True,
     install_requires=[
     ],
     license="BSD",
     zip_safe=False,
-    keywords='babel-yaml',
+    keywords='babel_yaml',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
