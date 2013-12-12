@@ -5,9 +5,7 @@ DEBUG = False
 
 # TODO: doesn't recognize translation comments yet, but I'm not really
 # in need of these
-# TODO: in order to work this needs to be a legit python package, 
-#  http://babel.edgewall.org/wiki/Documentation/0.9/messages.html#id1
-# TODO: line numbers seem to be off
+
 def extract_yaml(fileobj, keywords, comment_tags, options):
     """Extract messages from YAML source code.
 
@@ -35,15 +33,14 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
     last_token = None
     call_stack = -1
 
-    linecount = 0
+    linecount = 1
     token_line_no = 0
     for _type, value in tokenize(fileobj.read().decode(encoding)):
         token_type = str(_type)
+
         # if value.find('gettext') > -1:
-        #     print keywords.keys()
         #     print call_stack
-        #     print token_type, value
-        #     print linecount
+        #     print linecount, token_type, value
         #     print message_lineno
         #     print 
         # Token.Text.Break '\n
@@ -60,7 +57,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
         # Token.Text.Break '\n'
 
         if token_type == 'Token.Text.Break':
-            linecount += 1
+            linecount += len(value)
             call_stack = -1
 
         elif token_type == 'Token.Text.Blank':
