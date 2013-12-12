@@ -183,7 +183,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
             # Done here, so yield  the message
 
         elif call_stack == -1 and token_type == 'Token.Name.Type' and \
-                value in keywords.keys() \
+                value in keywords \
               and (last_token is None or last_token[0] != 'Token.Name.Type') and \
               (last_token[1] != 'function'):
             if DEBUG:
