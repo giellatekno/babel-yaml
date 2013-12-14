@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-DEBUG = True
+DEBUG = False
 
 # TODO: doesn't recognize translation comments yet, but I'm not really
 # in need of these
@@ -132,7 +132,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
                 if messages is not None:
                     print "zomg"
                     print (message_lineno, funcname, messages)
-                    yield (message_lineno, funcname, messages,
+                    yield (message_lineno, funcname, [messages],
                            [comment[1] for comment in translator_comments])
 
                 funcname = message_lineno = last_argument = None
@@ -175,7 +175,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
         elif funcname and call_stack == -1:
             if DEBUG:
                 print call_stack, '  has funcname quote end  ', value
-            yield (message_lineno, funcname, last_argument,
+            yield (message_lineno, funcname, [last_argument],
                    [comment[1] for comment in translator_comments])
             funcname = None
             last_argument = ''
