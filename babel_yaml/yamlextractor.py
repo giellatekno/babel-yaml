@@ -130,6 +130,8 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
                     translator_comments = []
 
                 if messages is not None:
+                    print "zomg"
+                    print (message_lineno, funcname, messages)
                     yield (message_lineno, funcname, messages,
                            [comment[1] for comment in translator_comments])
 
