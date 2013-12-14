@@ -20,6 +20,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
     from babel.messages.jslexer import tokenize, unquote_string
     from yamllex import YAMLLexer
 
+    print "is this even doing things?" 
     yaml_lexer = YAMLLexer()
 
     tokenize = yaml_lexer.get_tokens
