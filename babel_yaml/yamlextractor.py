@@ -17,7 +17,6 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
                          in the results
     :param options: a dictionary of additional options (optional)
     """
-    from babel.messages.jslexer import tokenize, unquote_string
     from yamllex import YAMLLexer
 
     yaml_lexer = YAMLLexer()
@@ -33,6 +32,8 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
     last_token = None
     call_stack = -1
 
+    if DEBUG:
+        print 'zomg'
     linecount = 1
     token_line_no = 0
     for _type, value in tokenize(fileobj.read().decode(encoding)):
@@ -175,14 +176,16 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
         elif funcname and call_stack == -1:
             if DEBUG:
                 print call_stack, '  has funcname quote end  ', value
-            yield (message_lineno, funcname, [last_argument],
+            f_func = funcname.replace('!', '')
+            yield (message_lineno, f_func, [last_argument],
                    [comment[1] for comment in translator_comments])
             funcname = None
+            f_func = None
             last_argument = ''
             # Done here, so yield  the message
 
         elif call_stack == -1 and token_type == 'Token.Name.Type' and \
-                value in keywords \
+                (value in keywords or value in options.get('keywords', [])) \
               and (last_token is None or last_token[0] != 'Token.Name.Type') and \
               (last_token[1] != 'function'):
             if DEBUG:
