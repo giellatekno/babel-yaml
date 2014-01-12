@@ -2,21 +2,21 @@
 Python Babel YAML Extractor
 ===============================
 
-.. image:: https://badge.fury.io/py/babel-yaml.png
-    :target: http://badge.fury.io/py/babel-yaml
+.. image:: https://badge.fury.io/py/babel_yaml.png
+    :target: http://badge.fury.io/py/babel_yaml
     
-.. image:: https://travis-ci.org/rtxanson/babel-yaml.png?branch=master
-        :target: https://travis-ci.org/rtxanson/babel-yaml
+.. image:: https://travis-ci.org/rtxanson/babel_yaml.png?branch=master
+        :target: https://travis-ci.org/rtxanson/babel_yaml
 
-.. image:: https://pypip.in/d/babel-yaml/badge.png
-        :target: https://crate.io/packages/babel-yaml?version=latest
+.. image:: https://pypip.in/d/babel_yaml/badge.png
+        :target: https://crate.io/packages/babel_yaml?version=latest
 
 
 Provides an extractor for producing translation strings from a yaml file. Very
 rough 'cause I needed itt in little time, so feel free to submit fixes and such.
 
 * Free software: BSD license
-* Documentation: http://babel-yaml.rtfd.org.
+* Documentation: http://babel_yaml.rtfd.org.
 
 Features
 --------

@@ -4,9 +4,9 @@ Installation
 
 At the command line::
 
-    $ easy_install babel-yaml
+    $ easy_install babel_yaml
 
 Or, if you have virtualenvwrapper installed::
 
-    $ mkvirtualenv babel-yaml
-    $ pip install babel-yaml
+    $ mkvirtualenv babel_yaml
+    $ pip install babel_yaml
