@@ -7,3 +7,7 @@ History
 ++++++++++++++++++
 
 * First release on PyPI.
+
+0.2.0 (2022–08–31)
+
+Updated to support python3
