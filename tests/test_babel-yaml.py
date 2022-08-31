@@ -8,12 +8,13 @@ test_babel_yaml
 Tests for `babel_yaml` module.
 """
 
+from __future__ import absolute_import
 import unittest
 
 from babel_yaml import babel_yaml
 
 
-class TestBabel-yaml(unittest.TestCase):
+class TestBabel_yaml(unittest.TestCase):
 
     def setUp(self):
         pass

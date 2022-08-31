@@ -12,6 +12,7 @@ http://pyyaml.org/browser/pyyaml/trunk/examples/pygments-lexer/
 License: Whatever suitable for inclusion into the Pygments package.
 """
 
+from __future__ import absolute_import
 from pygments.lexer import  \
         ExtendedRegexLexer, LexerContext, include, bygroups
 from pygments.token import  \

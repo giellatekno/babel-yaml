@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
+from __future__ import print_function
 DEBUG = False
 
 # TODO: doesn't recognize translation comments yet, but I'm not really
@@ -17,7 +19,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
                          in the results
     :param options: a dictionary of additional options (optional)
     """
-    from yamllex import YAMLLexer
+    from .yamllex import YAMLLexer
 
     yaml_lexer = YAMLLexer()
 
@@ -33,7 +35,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
     call_stack = -1
 
     if DEBUG:
-        print 'zomg'
+        print('zomg')
     linecount = 1
     token_line_no = 0
     for _type, value in tokenize(fileobj.read().decode(encoding)):
@@ -63,17 +65,17 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
 
         elif token_type == 'Token.Text.Blank':
             if funcname:
-                if DEBUG: print call_stack, "  in function   ", value
+                if DEBUG: print(call_stack, "  in function   ", value)
                 message_lineno = linecount
                 call_stack += 1
 
         elif token_type == 'Token.Literal.Scalar.Flow.Quote':
             if funcname:
-                if DEBUG: print call_stack, "  function quote      ", value
+                if DEBUG: print(call_stack, "  function quote      ", value)
                 concatenate_next = True
                 if concatenate_next and call_stack == 1:
                     concatenate_next = False
-                    if DEBUG: print new_value
+                    if DEBUG: print(new_value)
                 message_lineno = linecount
                 call_stack += 1
 
@@ -110,8 +112,8 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
         elif funcname and call_stack == 1:
             if token_type == 'Token.Literal.Scalar.Flow.Quote':
                 if DEBUG:
-                    print call_stack, 'funcname, got quote'
-                    print new_value
+                    print(call_stack, 'funcname, got quote')
+                    print(new_value)
 
                 # if last_argument is not None:
                 #     print '  last arg'
@@ -131,8 +133,8 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
                     translator_comments = []
 
                 if messages is not None:
-                    print "zomg"
-                    print (message_lineno, funcname, messages)
+                    print("zomg")
+                    print((message_lineno, funcname, messages))
                     yield (message_lineno, funcname, [messages],
                            [comment[1] for comment in translator_comments])
 
@@ -144,7 +146,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
 
             elif token_type == 'Token.Literal.Scalar.Flow':
                 if DEBUG:
-                    print call_stack, ' in flow', value
+                    print(call_stack, ' in flow', value)
                 new_value = value
                 if concatenate_next:
                     # print '   concat next'
@@ -155,7 +157,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
 
             elif token_type == 'Token.Text.Blank':
                 if DEBUG:
-                    print call_stack, ' in flow', value
+                    print(call_stack, ' in flow', value)
                 concatenate_next = True
             # elif token_type == 'operator':
             #     if value == ',':
@@ -170,12 +172,12 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
 
         elif call_stack > 0 and token_type == 'Token.Literal.Scalar.Flow.Quote':
             if DEBUG:
-                print call_stack, '  call_stack>0, got quote   ', value
+                print(call_stack, '  call_stack>0, got quote   ', value)
             call_stack -= 1
 
         elif funcname and call_stack == -1:
             if DEBUG:
-                print call_stack, '  has funcname quote end  ', value
+                print(call_stack, '  has funcname quote end  ', value)
             f_func = funcname.replace('!', '')
             yield (message_lineno, f_func, [last_argument],
                    [comment[1] for comment in translator_comments])
@@ -189,7 +191,7 @@ def extract_yaml(fileobj, keywords, comment_tags, options):
               and (last_token is None or last_token[0] != 'Token.Name.Type') and \
               (last_token[1] != 'function'):
             if DEBUG:
-                print call_stack, '  got funcname  ', value
+                print(call_stack, '  got funcname  ', value)
             funcname = value
 
         last_token = (token_type, value)
